@@ -2,12 +2,12 @@ import './App.css';
 import { useState } from 'react';
 
 const cardImages = [
-  {"src": ""},
-  {"src": ""},
-  {"src": ""},
-  {"src": ""},
-  {"src": ""},
-  {"src": ""}
+  {"src": "giyu.png"},
+  {"src": "mist.png"},
+  {"src": "Mitsuri.jpeg"},
+  {"src": "rengoku.jpg"},
+  {"src": "Sanemi.jpg"},
+  {"src": "uzui.jpg"}
 ]
 
 function App() {
@@ -30,6 +30,17 @@ function App() {
     <div className="App">
       <h1>Magic Match</h1>
       <button onClick={shuffleCards}>New Game</button>
+
+      <div className='card-grid'>
+        {cards.map(card => (
+          <div className="card" key={card.id}>
+            <div>
+              <img className='front' src={card.src} alt="card-front" />
+              <img className='back' src="cover.jpg" alt="card-back" />
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
