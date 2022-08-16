@@ -3,12 +3,12 @@ import { useState, useEffect } from 'react';
 import SingleCard from './components/SingleCard';
 
 const cardImages = [
-  {"src": "giyu.png"},
-  {"src": "mist.png"},
-  {"src": "Mitsuri.jpeg"},
-  {"src": "rengoku.jpg"},
-  {"src": "Sanemi.jpg"},
-  {"src": "uzui.jpg"}
+  {"src": "giyu.png", matched: false},
+  {"src": "mist.png", matched: false},
+  {"src": "Mitsuri.jpeg", matched: false},
+  {"src": "rengoku.jpg", matched: false},
+  {"src": "Sanemi.jpg", matched: false},
+  {"src": "uzui.jpg", matched: false}
 ]
 
 function App() {
@@ -38,14 +38,23 @@ function App() {
   useEffect(() => {
     if(choiceOne && choiceTwo){
       if(choiceOne.src === choiceTwo.src){
-        console.log('those cards match');
+        setCards(prevCards => {
+          return prevCards.map(card => {
+            if(card.src === choiceOne.src){
+              return {...card, matched: true}
+            } else{
+              return card
+            }
+          })
+        })
         resetTurn();
       } else {
-        console.log('those cards do not match')
         resetTurn()
       }
     }
   }, [choiceOne, choiceTwo])
+
+  console.log(cards)
   
 
   //reset choices & increase turn
